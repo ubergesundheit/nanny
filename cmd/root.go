@@ -103,7 +103,7 @@ func nannyCheck(nanny string) {
 	signal := api.Signal{
 		Name:       config.Name,
 		Notifier:   otherNannyNotifier,
-		NextSignal: "1s",
+		NextSignal: "10s",
 		Meta:       map[string]string{"addr": config.Addr},
 	}
 	data, err := json.Marshal(&signal)
