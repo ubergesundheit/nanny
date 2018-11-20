@@ -25,11 +25,11 @@ Call it via curl:
 ```bash
 curl http://localhost:8080/api/v1/signal --data '{ "name": "my awesome program", "notifier": "stderr", "next_signal": "5s" }'
 ```
-With this call, you tell nanny that if program named `my awesome program` does not call again within `next_signal` (5s), it should notify you using `stderr` notifier.
+With this call, you tell nanny that if program named `my awesome program` does not call again within `next_signal` (5s), it should notify you using `stderr` notifier. Additionally, nanny appends the IP or `X-Forwarded-For` HTTP header to the program name. You can disable this behaviour by sending a `X-Dont-Modify-Name` along with the request.
 
 After 5s pass, nanny prints to *stderr*:
 ```bash
-2018-06-26T14:24:29+02:00: Nanny: I haven't heard from "my awesome program@localhost:44554" in the last 5s! (Meta: map[])
+2018-06-26T14:24:29+02:00: Nanny: I haven't heard from "my awesome program@127.0.0.1" in the last 5s! (Meta: map[])
 ```
 
 ## Installation
@@ -198,13 +198,13 @@ Contributions welcome! Just be sure you run tests and lints.
 
 ```bash
 $ make
-  Build                          
-make build                            Build production binary.                           
-  Dev                            
-make run                              Run Nanny in dev mode, all logging and race detector ON. 
-make test                             Run tests.                                         
-make vet                              Run go vet.                                        
-make lint                             Run gometalinter (you have to install it). 
+  Build
+make build                            Build production binary.
+  Dev
+make run                              Run Nanny in dev mode, all logging and race detector ON.
+make test                             Run tests.
+make vet                              Run go vet.
+make lint                             Run gometalinter (you have to install it).
 ```
 
 ## FAQ
@@ -217,3 +217,5 @@ Also often programs just log errors and fail silently, with nanny they fail loud
 > How do I secure my nanny?
 
 To use HTTPS, or authentication you should use a reverse proxy like Apache or Nginx.
+
+[![](https://codescene.io/projects/3429/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/3429/jobs/latest-successful/results)
